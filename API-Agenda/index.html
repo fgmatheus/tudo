@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .form-container {
+        width: 300px;
+        margin: 0 auto;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 5px;
+    }
+    .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 20px 2px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Agendar um Compromisso</h2>
+    <form id="appointment-form">
+        <div class="form-group">
+            <label for="calendarId">ID do Calendário:</label>
+            <input type="text" id="calendarId" name="calendarId">
+        </div>
+        <div class="form-group">
+            <label for="barberColorId">ID da Cor do Barbeiro:</label>
+            <input type="text" id="barberColorId" name="barberColorId">
+        </div>
+        <div class="form-group">
+            <label for="dateTimeStart">Data/Hora de Início:</label>
+            <input type="datetime-local" id="dateTimeStart" name="dateTimeStart">
+        </div>
+        <div class="form-group">
+            <label for="dateTimeEnd">Data/Hora de Término:</label>
+            <input type="datetime-local" id="dateTimeEnd" name="dateTimeEnd">
+        </div>
+        <button type="submit" class="submit-btn">Agendar</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('appointment-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        // Desativar o botão de envio para evitar cliques múltiplos
+        const submitButton = document.getElementById('submit-button');
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
+
+        const calendarId = document.getElementById('calendarId').value;
+        const barberColorId = document.getElementById('barberColorId').value;
+        const dateTimeStart = document.getElementById('dateTimeStart').value;
+        const dateTimeEnd = document.getElementById('dateTimeEnd').value;
+
+        try {
+            const response = await fetch('http://localhost:3000/createAppointment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    calendarId,
+                    barberColorId,
+                    dateTimeStart,
+                    dateTimeEnd,
+                }),
+            });
+
+            if (response.ok) {
+                alert('Compromisso criado com sucesso!');
+            } else {
+                alert('O barbeiro não está disponível neste horário.');
+            }
+        } catch (error) {
+            console.error('Erro ao enviar a solicitação:', error);
+        } finally {
+            // Ativar o botão de envio após o processamento
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>
