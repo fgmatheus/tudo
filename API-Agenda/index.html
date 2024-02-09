@@ -3,108 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .form-container {
-        width: 300px;
-        margin: 0 auto;
-    }
-    .form-group {
-        margin-bottom: 15px;
-    }
-    .form-group label {
-        display: block;
-    }
-    .form-group input {
-        width: 100%;
-        padding: 5px;
-    }
-    .submit-btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 20px 2px;
-        cursor: pointer;
-    }
-</style>
+    <link rel="stylesheet" href="style.css">
+    <title>Agendamento de Corte</title>
 </head>
 <body>
-<div class="form-container">
-    <h2>Agendar um Compromisso</h2>
-    <form id="appointment-form">
-        <div class="form-group">
-            <label for="calendarId">ID do Calendário:</label>
-            <input type="text" id="calendarId" name="calendarId">
-        </div>
-        <div class="form-group">
-            <label for="barberColorId">ID da Cor do Barbeiro:</label>
-            <input type="text" id="barberColorId" name="barberColorId">
-        </div>
-        <div class="form-group">
-            <label for="dateTimeStart">Data/Hora de Início:</label>
-            <input type="datetime-local" id="dateTimeStart" name="dateTimeStart">
-        </div>
-        <div class="form-group">
-            <label for="dateTimeEnd">Data/Hora de Término:</label>
-            <input type="datetime-local" id="dateTimeEnd" name="dateTimeEnd">
-        </div>
-        <button type="submit" class="submit-btn">Agendar</button>
-    </form>
-</div>
+    <section class="agendamento">
+        <div class="formulario">
 
-<script>
-    document.getElementById('appointment-form').addEventListener('submit', async function(event) {
-        event.preventDefault();
+            <div class="opcoes">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" maxlength="20" onkeypress="preventNonAlphabetic(event)" required>
+            </div>
 
-        // Desativar o botão de envio para evitar cliques múltiplos
-        const submitButton = document.getElementById('submit-button');
-        if (submitButton) {
-            submitButton.disabled = true;
+            <div class="opcoes">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" maxlength="35" required>
+            </div>
+
+            <div class="opcoes">
+                <label for="phone">Telefone:</label>
+                <input type="text" id="phone" maxlength="9" oninput="validatePhone()" required>
+            </div>
+
+            <div class="opcoes">
+                <label for="barber">Escolha do Barbeiro:</label>
+                <select id="barber" required>
+                    <option value="barbeiro1">Barbeiro 1</option>
+                    <option value="barbeiro2">Barbeiro 2</option>
+                </select>
+            </div>
+
+            <div class="opcoes">
+                <label for="style">Estilo de Corte:</label>
+                <select id="style" required>
+                    <option value="normal">Corte Normal (30min)</option>
+                    <option value="barba">Corte + Barba (1h)</option>
+                </select>
+            </div>
+
+            <div class="opcoes">
+                <label for="date">Dia:</label>
+                <div id="date" class="date-container"></div>
+            </div>
+
+            <div class="opcoes">
+                <label for="time">Horário:</label>
+                <div id="time" class="time-container"></div>
+            </div>
+              
+            <div class="opcoes">
+                <button id="submit-button">Agendar</button>
+            </div>
+                
+
+            <div id="alert-message" class="alert" style="display: none;"></div>
+    
+            
+            <div id="successModal" class="modal">
+                <div class="modal-content">
+                    <div id="modalMessage" class="modal-message"></div>
+                    <button onclick="closeModal()">OK</button>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <script>
+        function preventNonAlphabetic(event) {
+            const keyCode = (event.keyCode ? event.keyCode : event.which);
+            if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 122)) {
+                event.preventDefault();
+            }
         }
 
-        const calendarId = document.getElementById('calendarId').value;
-        const barberColorId = document.getElementById('barberColorId').value;
-        const dateTimeStart = document.getElementById('dateTimeStart').value;
-        const dateTimeEnd = document.getElementById('dateTimeEnd').value;
+        function validatePhone() {
+            var phoneInput = document.getElementById('phone');
+            phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
+        }
 
-        try {
-            const response = await fetch('http://localhost:3000/createAppointment', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    calendarId,
-                    barberColorId,
-                    dateTimeStart,
-                    dateTimeEnd,
-                }),
+        function formatDateUserFriendly(date) {
+            const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
+            return date.toLocaleDateString('pt-BR', options);
+        }
+
+        function formatDate(date) {
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        }
+
+        function mapBarberToColor(barber) {
+            return barber === 'barbeiro1' ? '6' : barber === 'barbeiro2' ? '7' : '';
+        }
+
+        function getAvailableTimes(date, style) {
+            const normalTimes = ['08:00-08:30', '08:30-09:00', '09:00-09:30', '09:30-10:00', '10:00-10:30', '10:30-11:00', '11:00-11:30', '11:30-12:00', '12:00-12:30', '12:30-13:00', '15:00-15:30', '15:30-16:00', '16:00-16:30', '16:30-17:00', '17:00-17:30', '17:30-18:00', '18:00-18:30', '18:30-19:00'];
+            const extendedTimes = ['08:00-09:00', '09:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00', '15:00-16:00', '16:00-17:00', '17:00-18:00', '18:00-19:00'];
+            return style === 'barba' ? extendedTimes : normalTimes;
+        }
+
+        function updateTimeButtons(selectedDate) {
+            const timeContainer = document.getElementById('time');
+            const availableTimes = getAvailableTimes(selectedDate, document.getElementById('style').value);
+            timeContainer.innerHTML = ''; // Limpa os botões de horário
+
+            // Adiciona um botão para cada horário disponível
+            availableTimes.forEach(time => {
+                const button = document.createElement('button');
+                button.textContent = time;
+                button.setAttribute('data-time', time);
+                button.addEventListener('click', function(event) {
+                    // Remove a classe 'selected' de qualquer outro botão
+                    const buttons = timeContainer.getElementsByTagName('button');
+                    for (const otherButton of buttons) {
+                        otherButton.classList.remove('selected');
+                    }
+                    // Adiciona a classe 'selected' ao botão clicado
+                    event.target.classList.add('selected');
+                });
+                timeContainer.appendChild(button);
             });
-
-            if (response.ok) {
-                alert('Compromisso criado com sucesso!');
-            } else {
-                alert('O barbeiro não está disponível neste horário.');
-            }
-        } catch (error) {
-            console.error('Erro ao enviar a solicitação:', error);
-        } finally {
-            // Ativar o botão de envio após o processamento
-            if (submitButton) {
-                submitButton.disabled = false;
-            }
         }
-    });
-</script>
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateContainer = document.getElementById('date');
 
+            for (let i = 1; i <= 14; i++) {
+                const currentDate = new Date();
+                currentDate.setDate(currentDate.getDate() + i);
+
+                // Exclui sábados (6) e domingos (0)
+                if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) {
+                    const button = document.createElement('button');
+                    button.textContent = formatDateUserFriendly(currentDate);
+                    button.setAttribute('data-date', formatDate(currentDate));
+                    
+                    // Adiciona um ouvinte de evento ao botão para lidar com a seleção
+                    button.addEventListener('click', function(event) {
+                        // Remove a classe 'selected' de qualquer outro botão
+                        const buttons = dateContainer.getElementsByTagName('button');
+                        for (const otherButton of buttons) {
+                            otherButton.classList.remove('selected');
+                        }
+
+                        // Adiciona a classe 'selected' ao botão clicado
+                        event.target.classList.add('selected');
+
+                        // Obtém a data selecionada a partir do atributo 'data-date' do botão
+                        const selectedDate = new Date(event.target.getAttribute('data-date'));
+                        // Atualiza os botões de horário com base na data selecionada
+                        updateTimeButtons(selectedDate);
+                    });
+
+                    dateContainer.appendChild(button);
+                }
+            }
+
+            // Inicializa com a primeira data
+            const firstDateButton = dateContainer.querySelector('button');
+            firstDateButton.click(); // Simula um clique no primeiro botão de data
+        });
+
+        document.getElementById('submit-button').addEventListener('click', async function() {
+            const calendarId = 'f4392d051f66e3988107791ea88f04fe83f4641849fe2ffe8773c08e32bebaa6@group.calendar.google.com';
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const selectedBarber = document.getElementById('barber').value;
+            const barberColorId = mapBarberToColor(selectedBarber);
+            const selectedDate = new Date(document.querySelector('#date button.selected').getAttribute('data-date'));
+            const selectedStyle = document.getElementById('style').value;
+            const selectedTime = document.querySelector('#time button.selected');
+            if (!name || !email || !phone || !selectedBarber || !selectedStyle || !selectedTime) {
+                displayAlert('danger', 'Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+            const selectedTimeValue = selectedTime.getAttribute('data-time');
+            const [entry, exit] = selectedTimeValue.split('-');
+            const entryDate = new Date(selectedDate);
+            entryDate.setUTCHours(Number(entry.split(':')[0]), Number(entry.split(':')[1]), 0, 0, 0);
+            const exitDate = new Date(selectedDate);
+            exitDate.setUTCHours(Number(exit.split(':')[0]), Number(exit.split(':')[1]), 0, 0, 0);
+            const dateTimeStart = entryDate.toISOString();
+            const dateTimeEnd = exitDate.toISOString();
+
+    try {
+        const response = await fetch('http://localhost:3000/createAppointment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                clientName: name,
+                clientEmail: email,
+                clientPhone: phone,
+                calendarId,
+                barberColorId,
+                dateTimeStart,
+                dateTimeEnd,
+            }),
+        });
+
+        if (response.ok) {
+            const styleLabel = selectedStyle === 'normal' ? 'Corte Normal (30min)' : 'Corte + Barba (1h)';
+        // Adicionado +1 dia à data para corrigir o problema
+        const formattedDate = formatDateUserFriendly(new Date(selectedDate.getTime() + 24 * 60 * 60 * 1000));
+        const successMessage = `Compromisso criado com sucesso!\n\nNome: ${name}\nE-mail: ${email}\nTelefone: ${phone}\nBarbeiro: ${selectedBarber}\nEstilo: ${styleLabel}\nData: ${formattedDate}\nHorário: ${selectedTimeValue}`;
+        openModal(successMessage);
+        } else {
+            displayAlert('danger', 'O barbeiro não está disponível neste horário.');
+        }
+    } catch (error) {
+        console.error('Erro ao enviar a solicitação:', error);
+        displayAlert('danger', 'Erro ao enviar a solicitação.');
+    }
+});
+
+        // Função para abrir o modal com as informações do compromisso
+        function openModal(message) {
+    const modalMessage = document.getElementById('modalMessage');
+    const lines = message.split('\n');
+    modalMessage.innerHTML = `<h2>${lines[0]}</h2>`;
+    for (let i = 1; i < lines.length; i++) {
+        const indexOfColon = lines[i].indexOf(':');
+        if (indexOfColon !== -1) {
+            const label = lines[i].substring(0, indexOfColon + 1);
+            let value = lines[i].substring(indexOfColon + 1).trim();
+
+            // Adiciona espaçamento antes de "Nome:", "Telefone:", etc.
+            if (label === "Nome:" || label === "Telefone:" || label === "E-mail:") {
+                value = `<span style="margin-right: 5px;">${value}</span>`;
+            }
+
+            modalMessage.innerHTML += `<p><strong>${label}</strong> ${value}</p>`;
+        } else {
+            modalMessage.innerHTML += `<p>${lines[i]}</p>`;
+        }
+    }
+    document.getElementById('successModal').style.display = 'block';
+}
+
+        // Função para fechar o modal
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        function displayAlert(type, message) {
+            const alertDiv = document.getElementById('alert-message');
+            alertDiv.textContent = message;
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.style.display = 'block';
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
