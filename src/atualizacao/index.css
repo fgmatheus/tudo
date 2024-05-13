@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+
+header{
+    display: flex;
+    height: 15vh;
+}
+
+body{
+  background-color: grey;
+}
+
+.botoes{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header h2{
+    margin: auto;
+}
+
+.voltar a{  
+    text-decoration: none;
+    color: green;
+    font-size: 15px;
+    text-align: center;
+}
+
+.salvar{
+  font-size: 15px;
+}
+
+header button{
+    margin: 40px 10px 20px 10px;
+    gap: 20px;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: white;
+    color: green;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+header button:hover{
+    background-color: greenyellow;
+    color: black;
+    transform: scale(0.96);
+    transition: 0.8s;
+}
+
+/*  */
+
+.reserva{
+  text-align: center;
+  border: 1px solid white;
+}
+
+
+/*  */
+.menu{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.menu input{
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    color: black;
+    background-color: greenyellow;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.menu input:hover{
+    background-color: white;
+    color: green;
+    transition: 0.5s;
+}
+
+
+
+
+/*  */
+.pratos{
+    width: 60vw;
+    height: 200px;
+    border: 1px solid black;
+    display: flex;
+    margin: 80px auto;
+}
+
+#image{
+    width: 10vw;
+    height: 198px;
+    border: 1px solid black;
+    background-size: contain;
+}
+
+.oi{
+    display: grid;
+}
+
+#NomeDoPrato{
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 40vw;
+    height: 20px;
+}
+
+#descricao{
+    width: 40vw;
+    height: 20px;
+    margin-left: 20px;
+}
+
+#preco{
+    width: 10vw;
+    height: 20px;
+    margin-left: auto;
+}
+
+
+/*  */
+
+.botao-final{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+div button{
+    float: right;
+    margin: 10px 80px 50px 80px;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    color: black;
+    background-color: greenyellow;
+    font-weight: bolder;
+    font-size: xx-large;
+    cursor: pointer;
+}
+
+div button:hover, .especial:hover{
+    background-color: white;
+    color: green;
+    transition: 0.5s;
+    transform: scale(1.07);
+}
+
+.especial{
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+@media screen and (max-width: 1200px){
+    header{
+        display: inline;
+        height: 20vh;
+    }
+    
+    .botoes{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    header h2{
+        margin: 40px;
+    }
+    
+    header button{
+        margin: 40px 30px 20px 30px;
+    }
+   
+}

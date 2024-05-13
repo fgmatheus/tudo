@@ -1,0 +1,732 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+:root{ 
+    --font0: 'Roboto', sans-serif;
+    --font1: 'Satisfy', cursive;
+    --color0: greenyellow;
+    --color1: green;
+    --color2: grey;
+}
+
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: var(--font0)
+}
+
+header{
+    background-color: var(--color2);
+    padding-bottom: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header img{
+    width: 200px;
+    padding-left: 20px;
+}
+
+header span{
+    color: var(--color0);
+    float: right;
+    margin: 30px;
+    margin-top: -90px;
+    transform: scale(1.7);
+    cursor: pointer;
+}
+
+.hamburguer .icone-x{
+    display: none;
+}
+
+menu{
+    display: none;
+}
+
+#itens a{
+    text-decoration: none;
+    color: var(--color0);
+    padding: 13px;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+}
+
+#itens a:hover{
+    background-color: white;
+    color: var(--color1);
+    border-radius: 20px;    
+}
+
+/*  */
+/* Estilo para a área de login */
+.login-area {
+  background-color: var(--color2);
+  padding: 20px;
+  display: none; /* Inicialmente oculta */
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 2; /* Certifique-se de que está na frente do menu */
+}
+
+.login-area input[type="text"],
+.login-area input[type="password"] {
+  width: 96%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--color0);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.login-area button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color0);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Adiciona uma transição suave */
+}
+
+/* Estilize o botão quando o mouse passar por cima */
+.login-area button:hover {
+  background-color: var(--color1);
+}
+
+/*  */
+
+main{
+    width: 100%;
+}
+main img{
+    width: 100%;
+    background-size: cover;
+}
+
+
+
+article{
+    padding-top: 40px;
+    background-color: var(--color2);
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.281);
+    padding-bottom: 40px;
+    width: 100%;
+}
+
+.visu-nome h1{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.visu-nome p{
+    text-align: center;
+    font-family: var(--font0);
+    font-size: larger;
+    padding-bottom: 60px;
+}
+
+iframe{
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+        /* PARALLAX */
+section.parallax{
+    background-attachment: fixed;
+    width: 100%;
+    height: 650px;
+    background-image: url(https://static.nationalgeographicbrasil.com/files/styles/image_3200/public/01-sloth-births-minden_90693221.jpg?w=1600&h=900);
+    background-position: right center;
+    background-size: cover;
+
+}
+
+main h1{
+    font-family: var(--font1);
+    font-size: 50px;
+    color: var(--color0);
+    text-shadow: 2px 2px 2px black;
+    text-align: center;
+}
+
+article h2{
+    font-family: var(--font0);
+    color: var(--color0);
+    text-shadow: 2px 2px 2px black;
+    text-align: center;
+}
+
+article p{
+    text-align: justify;
+    padding: 10px;
+
+}
+
+article .imagem{
+    margin: 30px;
+    width: 250px;
+}
+
+
+#scrollTopButton{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background: none;
+    border: none;
+    filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.473));
+    font-size: 40px;
+    color: var(--color0);
+    cursor: pointer;
+}
+
+footer{
+    background-color: var(--color2);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding: 15px;
+}
+/*  */
+.projeto{
+    display: grid;
+}
+
+.projetos{
+    width: 500px;
+    height: 200px;
+
+}
+
+.serviço, .projeto{
+    display: flex;
+    flex-direction: column;
+}
+
+.nome{ 
+    width: 90%;
+    margin: 40px;
+    text-align: center;
+     
+}
+
+.serviços, .projetos{
+    width: 85%;
+    padding: 20px;
+    margin: 20px;
+    text-align: justify;
+    background-color: white;
+    color: var(--color2);
+    font-weight: bolder;
+    font-size: larger;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5)
+}
+
+.serviços h2, .projetos h2{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+hr{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+/* .teste{
+    background-attachment: fixed;
+    width: 100%;
+    height: 150px;
+    background-image: url(https://static.vecteezy.com/ti/vetor-gratis/p3/151568-vetorial-de-fundo-falling-lights-matrix-vetor.jpg);
+    background-position: right center;
+    background-size: cover;
+} */
+
+.contato{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    margin: 60px;
+}
+
+.contatos img{
+    width: 40px;
+    mix-blend-mode: multiply;
+}
+
+
+/*Typical Device Breakpoint
+-----------------------------
+Pequenas telas: até 600px
+Celulares: de 600px até 768px
+Tablet: 768px até 992px
+Desktop: 992px até 1200px
+Grandes telas: acima de 1200px 
+ */
+
+@media screen and (min-width:768px) and (max-width:992px){
+    
+    menu#itens{
+        display: block;
+        
+    }
+
+    #itens ul{
+        list-style-type: none;
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+    }
+    
+
+    #itens li a{
+        font-size: 1.1rem;
+        cursor: pointer;
+        padding: 20px 15px;
+        transition: 0.5s;
+        color: var(--color0);
+        text-decoration: none;
+    }
+    
+    #itens li a:hover{
+        color: var(--color1);
+        border-radius: 10px;
+        transition: 0.5s;
+    }
+
+    /*  */
+    /* Estilize a área de login */
+.login-area {
+    position: fixed; /* Define a posição fixa */
+    top: 218px; /* Ajuste a distância do topo do menu */
+    right: 10px; /* Ajuste a distância da direita do menu */
+    background-color: var(--color2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 2; /* Certifique-se de que está na frente do menu */
+  }
+  
+  .login-area input[type="text"],
+  .login-area input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--color0);
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .login-area button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  /* Estilize o botão quando o mouse passar por cima */
+  .login-area button:hover {
+    background-color: var(--color1);
+  }
+  
+    /*  */
+
+    .hamburguer {
+        top: 0;
+        left: 0;
+      }
+
+    span#menu{
+        display: none;
+    }
+
+    .serviço, .projeto{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nome{ 
+        width: 90%;
+        margin: 40px;
+        text-align: center;
+         
+    }
+
+    .serviços, .projetos{
+        width: 90%;
+        padding: 20px;
+        margin: 20px;
+        text-align: justify;
+        background-color: white;
+        color: var(--color2);
+        font-weight: bolder;
+        font-size: larger;
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5)
+    }
+
+    .serviços h2, .projetos h2{
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .visu-nome{
+        margin: 20px 0 60px 0;
+    }
+    
+    .visu-nome h1{
+        padding-bottom: 20px;
+    }
+    
+    .visu-nome p{
+        text-align: center;
+        font-family: var(--font0);
+        font-size: larger;
+    }
+    
+}
+
+@media screen and (min-width:992px) and (max-width:1400px){
+    
+    menu#itens{
+        display: block;
+    }
+    
+    header{
+        position: fixed;
+        z-index: 1;
+        background-color: var(--color2);
+        box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.349);
+    }
+
+    .hamburguer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+
+      #numero h2{
+        font-size: 45px;
+        font-family: var(--font1);
+        text-align: left;
+        display: inline-block;
+        margin: 0;
+    }
+    
+    #itens ul{
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 20px;
+    }
+    
+
+    #itens li a{
+        font-size: 1.1rem;
+        cursor: pointer;
+        padding: 20px 15px;
+        transition: 0.5s;
+        color: var(--color0);
+        text-decoration: none;
+    }
+    
+    #itens li a:hover{
+        color: var(--color1);
+        border-radius: 10px;
+        transition: 0.5s;
+    }
+
+    /*  */
+    /* Estilize a área de login */
+.login-area {
+    position: fixed; /* Define a posição fixa */
+    top: 67px; /* Ajuste a distância do topo do menu */
+    right: 8px; /* Ajuste a distância da direita do menu */
+    background-color: var(--color2);
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 2; /* Certifique-se de que está na frente do menu */
+  }
+  
+  .login-area input[type="text"],
+  .login-area input[type="password"] {
+    width: 96%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--color0);
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .login-area button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Adiciona uma transição suave */
+  }
+  
+  /* Estilize o botão quando o mouse passar por cima */
+  .login-area button:hover {
+    background-color: var(--color1);
+  }
+  
+    /*  */
+
+    span#menu{
+        display: none;
+    }
+
+    .container{
+        position: relative;
+        width: 300px;
+        height: 600px;
+    }
+    img.imagem {
+        margin-top: 15%;
+        margin-left:55%;
+        width: 23vw;
+      }
+      p.texto{
+        position: absolute;
+        top: 0;
+        padding-left: 60vw;
+        padding-top: 4vh;
+        width: 35vw;
+        justify-content: right;
+        text-align: justify;
+        line-height: 1.5;
+    }
+
+    .serviço, .projeto{
+        display: grid;
+    }
+
+    .nome{ 
+        width: 100%;
+        margin: 40px;
+        text-align: center;
+        grid-row: 2/3;
+        margin-left: 50%; 
+    }
+
+    .serviços, .projetos{
+        width: 80%;
+        padding: 20px;
+        grid-row: 4/3;
+        margin: 20px;
+        text-align: justify;
+        background-color: white;
+        color: var(--color2);
+        font-weight: bolder;
+        font-size: larger;
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5)
+    }
+
+    .serviços h2, .projetos h2{
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    
+    .visu-nome h1{
+        padding-top: 100px;
+        padding-bottom: 20px;
+    }
+    
+    .visu-nome p{
+        text-align: center;
+        font-family: var(--font0);
+        font-size: larger;
+    }
+    
+}
+
+@media screen and (min-width:1400px){
+
+    menu#itens{
+        display: block;
+    }
+    
+    header{
+        position: fixed;
+        z-index: 1;
+        background-color: var(--color2);
+        box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.349);
+    }
+
+    .hamburguer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+
+      #numero h2{
+        font-size: 45px;
+        font-family: var(--font1);
+        text-align: left;
+        display: inline-block;
+        margin: 0;
+    }
+    .image-container{
+        height: 80vh;
+    }
+    
+    #itens ul{
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 20px;
+    }
+    
+
+    #itens li a{
+        font-size: 1.1rem;
+        cursor: pointer;
+        padding: 20px 15px;
+        transition: 0.5s;
+        color: var(--color0);
+        text-decoration: none;
+    }
+    
+    #itens li a:hover{
+        color: var(--color1);
+        border-radius: 10px;
+        transition: 0.5s;
+    }
+
+    /*  */
+    /* Estilize a área de login */
+.login-area {
+    position: fixed; /* Define a posição fixa */
+    top: 67px; /* Ajuste a distância do topo do menu */
+    right: 10px; /* Ajuste a distância da direita do menu */
+    background-color: var(--color2);
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 2; /* Certifique-se de que está na frente do menu */
+  }
+  
+  .login-area input[type="text"],
+  .login-area input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--color0);
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .login-area button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Adiciona uma transição suave */
+  }
+  
+  /* Estilize o botão quando o mouse passar por cima */
+  .login-area button:hover {
+    background-color: var(--color1);
+  }
+  
+    /*  */
+
+    span#menu{
+        display: none;
+    }
+
+    .container{
+        position: relative;
+        width: 300px;
+        height: 600px;
+    }
+    .imagem {
+        padding-left: 200px;
+        width: 100%;
+        z-index: 1;
+      }
+      p.texto{
+        position: absolute;
+        top: 0;
+        padding-left: 60vw;
+        padding-top: 15vh;
+        width: 35vw;
+        justify-content: right;
+        text-align: justify;
+        line-height: 1.5;
+    }
+
+    .serviço, .projeto{
+        display: grid;
+    }
+
+    .nome{ 
+        width: 100%;
+        margin: 40px;
+        text-align: center;
+        grid-row: 2/3;
+        margin-left: 50%; 
+    }
+
+    .serviços, .projetos{
+        width: 90%;
+        padding: 20px;
+        grid-row: 4/3;
+        margin: 20px;
+        text-align: justify;
+        background-color: white;
+        color: var(--color2);
+        font-weight: bolder;
+        font-size: larger;
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5)
+    }
+
+    .serviços h2, .projetos h2{
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .visu-nome h1{
+        padding-top: 100px;
+        padding-bottom: 20px;
+    }
+    
+    .visu-nome p{
+        text-align: center;
+        font-family: var(--font0);
+        font-size: larger;
+    }
+
+}
